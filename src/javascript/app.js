@@ -4,5 +4,5 @@ import SearchBar from './components/search';
 
 ReactDOM.render(
   <SearchBar/>,
-  document.getElementById('root')
+  document.getElementById('inputBox')
 ); 

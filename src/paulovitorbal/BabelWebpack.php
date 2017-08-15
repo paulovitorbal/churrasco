@@ -16,6 +16,8 @@ class BabelWebpack {
 			$new = BabelWebpack::getFileList();
 			if ($new != $old){
 				echo "Rerun babel and webpack\n";
+				BabelWebpack::run();
+
 			}
 			$old = $new;
 			sleep(1);
