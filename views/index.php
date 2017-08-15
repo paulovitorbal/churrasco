@@ -3,6 +3,7 @@
         <div class="box">
             <div class="content">
                 <h1 class="title has-text-centered">Ingressos do Churrasco</h1>
+                <div id="root"></div>
             </div>
         </div>
     </div>
@@ -41,5 +42,3 @@
     </div>
 </section>
 
-
-<script src="/javascript/app.js"> </script>

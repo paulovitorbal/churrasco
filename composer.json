@@ -17,10 +17,8 @@
         }
     },
     "scripts":{
-        "teste": "Paulovitorbal\\BabelWebpack::test",
-        "babel":".\\node_modules\\.bin\\babel src\\javascript -o tmp\\bundle.js",
-        "webpack": "node_modules\\.bin\\webpack.cmd tmp\\bundle.js --output-filename bundle.js",
-        "clearTmp": "del tmp\\bundle.js",
-        "compileJs": ["@babel", "@webpack", "@clearTmp"]
+        "watcher": [
+            "Paulovitorbal\\BabelWebpack::watcher"
+        ]
     }
 }

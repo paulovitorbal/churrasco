@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SearchBar from './components/search';
 
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <SearchBar/>,
   document.getElementById('root')
-);  
+); 
