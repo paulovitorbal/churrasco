@@ -7,7 +7,11 @@
         </div>
     </div>
 </section>
+<section >
+    <div id="inputBox"></div>
+</section>
 <section class="section">
+
     <div class="container">
         <div class="box" id="inputBox">
             
