@@ -19,6 +19,7 @@
     "scripts":{
         "watcher": [
             "Paulovitorbal\\BabelWebpack::watcher"
-        ]
+        ],
+        "serve": "php -S localhost:80 index.php"
     }
 }

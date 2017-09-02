@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+
+
+
 class SearchBar extends Component{
     
     
@@ -24,9 +27,9 @@ class SearchBar extends Component{
                     </div>
                     <div className="control">
                         <a className="button is-success" id="sincronizar"
+                        onClick={() => this.props.sync()}
                         >Sincronizar</a>
                     </div>
-                    
                 </div>
             </div>
 		);
