@@ -1,12 +1,10 @@
 CACHE MANIFEST
 
 CACHE:
-css/bulma.css
-css/font-awesome.min.css
-css/app.css
-bundle.js
-favicon.png
-
+/css/bulma.css
+/bundle.js
+/favicon.png
+/
 
 NETWORK:
-/api/*
+/api/sync

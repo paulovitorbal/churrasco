@@ -1,16 +1,4 @@
 <?php
-
-
-if (preg_match('/\.(?:css|js|map|html|png)$/', $_SERVER["SCRIPT_NAME"])) {
-    return false;    // serve the requested resource as-is.
-}
-if (preg_match('/\.(?:appcache)$/', $_SERVER["SCRIPT_NAME"])) {
-	header('Content-Type: text/cache-manifest');
-    return false;    // serve the requested resource as-is.
-}
-
-
-
 require __DIR__ . '/vendor/autoload.php';
 require 'View.php';
 
