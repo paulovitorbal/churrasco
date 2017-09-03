@@ -5,7 +5,7 @@ class Historico extends Component{
         let rows = [];
         this.props.linhas.reverse().forEach(function(val, index){
             rows.push(
-                <tr>
+                <tr key={val.id}>
                     <td>{val.id}</td>
                     <td>{val.time.toLocaleTimeString()}</td>
                     <td>{val.convite}</td>

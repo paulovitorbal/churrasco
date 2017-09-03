@@ -50,13 +50,14 @@ class App extends Component{
     	let usuario = prompt("Informe seu nome:");
     	if (usuario == null || usuario == "")
     		return;
-    	
+    	var chave;
     	db.table('convites')
 		      .toArray()
 		      .then((convites) => {
 		      	let c = convites.map(function(element){
 		      		element.usuario = usuario;
 				  	element.time = element.time.valueOf();
+				  	element.chave = $('#chave').val();
 				  	if (element.sync == false) //filter
 				  		return element;
 				  });
@@ -73,14 +74,15 @@ class App extends Component{
 				retorno = retorno.map(function(element){
 					element.time = new Date(element.time);
 					if (element.sync == 1)
-						element.sync = ture;
+						element.sync = true;
 					else
 						element.sync = false;
-					console.log(element);
-					return element;
+					element.id = parseInt(element.id,10);
+					db.table('convites').where('id').equals(element.id).delete();
+					db.table('convites').add(element);
 				});
-				this.setState({ linhas:retorno });
-				});
+				this.refresh();
+    	});
     }
 	render(){
 		this.refresh();

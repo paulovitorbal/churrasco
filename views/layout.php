@@ -1,4 +1,4 @@
-<html <?php //echo 'manifest="churrasco.appcache"'?>>
+<html manifest="churrasco.appcache">
 
     <head>
     	<meta charset="utf-8" />

@@ -5,7 +5,7 @@ namespace Paulovitorbal;
 
 class BabelWebpack {
 	const BABEL = ".\\node_modules\\.bin\\babel src\\javascript --out-dir lib";
-	const WEBPACK = "node_modules\\.bin\\webpack.cmd lib\\app.js --devtool eval-source-map --output-filename bundle.js"; 
+	const WEBPACK = "node_modules\\.bin\\webpack.cmd --optimize-minimize lib\\app.js --output-filename bundle.js"; 
 	public static function watcher(){
 		
 		echo "Watching js files;\n";

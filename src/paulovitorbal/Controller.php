@@ -23,6 +23,7 @@ class Controller{
 			$table->addColumn($column);
 			$table->addConstraint(new Constraint\PrimaryKey('id_churrasco'));
 			$table->addColumn(new Column\Text('txt_convite', 14));
+			$table->addColumn(new Column\Text('txt_chave', 23));
 			$table->addColumn(new Column\Datetime('dt_entrada'));
 			$table->addColumn(new Column\Integer('nu_seq_usuario'));
 			$table->addColumn(new Column\Varchar('no_usuario', 30));
@@ -34,12 +35,15 @@ class Controller{
 		}
 	}
 	public function sync($adapter, $convites){
-
-
+		if ($convites == []){
+			echo json_encode($convites);	
+			return;
+		} 
 		$this->verifyIfTableExists($adapter, 'convites');
 		$table = new TableGateway('convites', $adapter); 
-
+		$return = [];
 		foreach ($convites as $convite) {
+			if ($convite == "") continue;
 			$d = new \DateTime('@' . floor($convite['time']/1000));
 			$d->setTimezone(new \DateTimeZone('America/Sao_Paulo'));
 			$data = [
@@ -47,12 +51,13 @@ class Controller{
 				'dt_entrada' => $d->format('Y-m-d H:i:s'),
 				'nu_seq_usuario' => $convite['id'],
 				'no_usuario' => $convite['usuario'],
+				'txt_chave' => $convite['chave']
 			];
 			$table->insert($data);
 		}
 
-		$result = $table->select();
-		$return = [];
+		$result = $table->select(['txt_chave'=>$convite['chave']]);
+		
 		foreach ($result as $convite) {
 			$d = new \DateTime($convite['dt_entrada']);
 
