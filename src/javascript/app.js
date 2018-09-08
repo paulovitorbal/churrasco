@@ -18,7 +18,8 @@ class App extends Component{
 
         
         this.state = {
-            linhas: []
+            linhas: [],
+			user: null
         }
         
 		
@@ -33,8 +34,8 @@ class App extends Component{
             sync: false
         };
         db.table("convites").add(row);
-        
-        this.refresh();
+
+        this.sync();
 
     }
     refresh(){
@@ -46,16 +47,21 @@ class App extends Component{
 		
     }
     sync(){
-    	
-    	let usuario = prompt("Informe seu nome:");
-    	if (usuario == null || usuario == "")
-    		return;
-    	var chave;
+		let usuario = null;
+    	if ($('#user').val() == null || $('#user').val() == ""){
+            usuario = prompt("Informe seu nome:");
+            if (usuario == null || usuario == "")
+                return;
+            $('#user').val(usuario);
+            console.log('setting user with jquery');
+
+        }
+
     	db.table('convites')
 		      .toArray()
 		      .then((convites) => {
 		      	let c = convites.map(function(element){
-		      		element.usuario = usuario;
+		      		element.usuario = $('#user').val();
 				  	element.time = element.time.valueOf();
 				  	element.chave = $('#chave').val();
 				  	if (element.sync == false) //filter
@@ -90,7 +96,7 @@ class App extends Component{
 		<div className="section">
 			<SearchBar action={(i)=>this.adicionarLinha(i)} sync={(i)=>this.sync(i)} closeModal={(i)=>this.closeModal(i)}/>
 			<h2 className="subtitle">Histórico</h2>
-			<Historico linhas={this.state.linhas} />
+			<Historico linhas={this.state.linhas} user={this.state.user} />
 		</div>
 	)	;
 	}

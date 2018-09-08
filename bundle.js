@@ -14435,7 +14435,8 @@ var App = function (_Component) {
 		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 		_this.state = {
-			linhas: []
+			linhas: [],
+			user: null
 		};
 
 		return _this;
@@ -14454,7 +14455,7 @@ var App = function (_Component) {
 			};
 			_db2.default.table("convites").add(row);
 
-			this.refresh();
+			this.sync();
 		}
 	}, {
 		key: 'refresh',
@@ -14470,12 +14471,17 @@ var App = function (_Component) {
 		value: function sync() {
 			var _this3 = this;
 
-			var usuario = prompt("Informe seu nome:");
-			if (usuario == null || usuario == "") return;
-			var chave;
+			var usuario = null;
+			if ((0, _jquery2.default)('#user').val() == null || (0, _jquery2.default)('#user').val() == "") {
+				usuario = prompt("Informe seu nome:");
+				if (usuario == null || usuario == "") return;
+				(0, _jquery2.default)('#user').val(usuario);
+				console.log('setting user with jquery');
+			}
+
 			_db2.default.table('convites').toArray().then(function (convites) {
 				var c = convites.map(function (element) {
-					element.usuario = usuario;
+					element.usuario = (0, _jquery2.default)('#user').val();
 					element.time = element.time.valueOf();
 					element.chave = (0, _jquery2.default)('#chave').val();
 					if (element.sync == false) //filter
@@ -14521,7 +14527,7 @@ var App = function (_Component) {
 					{ className: 'subtitle' },
 					'Hist\xF3rico'
 				),
-				_react2.default.createElement(_historico2.default, { linhas: this.state.linhas })
+				_react2.default.createElement(_historico2.default, { linhas: this.state.linhas, user: this.state.user })
 			);
 		}
 	}]);
@@ -37899,9 +37905,9 @@ jQuery.nodeName = nodeName;
 // https://github.com/jrburke/requirejs/wiki/Updating-existing-libraries#wiki-anon
 
 if ( true ) {
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function() {
+	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
 		return jQuery;
-	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+	}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 }
 
