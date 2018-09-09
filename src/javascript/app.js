@@ -34,7 +34,7 @@ class App extends Component{
             sync: false
         };
         db.table("convites").add(row);
-
+        document.getElementById('entrada').value = '';
         this.sync();
 
     }
@@ -46,6 +46,11 @@ class App extends Component{
 		});
 		
     }
+    change(valor){
+		if (valor.toString().length > 8){
+			this.adicionarLinha(valor);
+		}
+	}
     sync(){
 		let usuario = null;
     	if ($('#user').val() == null || $('#user').val() == ""){
@@ -94,7 +99,12 @@ class App extends Component{
 		this.refresh();
 		return (
 		<div className="section">
-			<SearchBar action={(i)=>this.adicionarLinha(i)} sync={(i)=>this.sync(i)} closeModal={(i)=>this.closeModal(i)}/>
+			<SearchBar
+				action={(i)=>this.adicionarLinha(i)}
+				change={(i)=>this.change(i)}
+				sync={(i)=>this.sync(i)}
+				closeModal={(i)=>this.closeModal(i)}
+			/>
 			<h2 className="subtitle">Histórico</h2>
 			<Historico linhas={this.state.linhas} user={this.state.user} />
 		</div>

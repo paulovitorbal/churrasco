@@ -14454,7 +14454,7 @@ var App = function (_Component) {
 				sync: false
 			};
 			_db2.default.table("convites").add(row);
-
+			document.getElementById('entrada').value = '';
 			this.sync();
 		}
 	}, {
@@ -14465,6 +14465,13 @@ var App = function (_Component) {
 			_db2.default.table('convites').toArray().then(function (convites) {
 				_this2.setState({ linhas: convites });
 			});
+		}
+	}, {
+		key: 'change',
+		value: function change(valor) {
+			if (valor.toString().length > 8) {
+				this.adicionarLinha(valor);
+			}
 		}
 	}, {
 		key: 'sync',
@@ -14515,13 +14522,20 @@ var App = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'section' },
-				_react2.default.createElement(_search2.default, { action: function action(i) {
+				_react2.default.createElement(_search2.default, {
+					action: function action(i) {
 						return _this4.adicionarLinha(i);
-					}, sync: function sync(i) {
+					},
+					change: function change(i) {
+						return _this4.change(i);
+					},
+					sync: function sync(i) {
 						return _this4.sync(i);
-					}, closeModal: function closeModal(i) {
+					},
+					closeModal: function closeModal(i) {
 						return _this4.closeModal(i);
-					} }),
+					}
+				}),
 				_react2.default.createElement(
 					'h2',
 					{ className: 'subtitle' },
@@ -27488,7 +27502,10 @@ var SearchBar = function (_Component) {
                             className: "input",
                             placeholder: "N\xFAmero do convite",
                             type: "number",
-                            id: "entrada"
+                            id: "entrada",
+                            onInput: function onInput() {
+                                return _this2.props.change(document.getElementById('entrada').value);
+                            }
                         })
                     )
                 ),

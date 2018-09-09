@@ -16,6 +16,7 @@ class SearchBar extends Component{
                             placeholder="Número do convite" 
                             type="number" 
                             id="entrada"
+                            onInput={() => this.props.change(document.getElementById('entrada').value)}
                         />
                     </div>
                 </div>
